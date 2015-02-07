@@ -1,0 +1,7 @@
+You have to evaluate the BST data structure in a concurrent context:
+
+1. Make the BST thread-safe (Add needed mecanisms to guarantee data consistency). You can adapt (optimize) the structure while the BST properties are respected
+2. Add monitor to evaluate the time of an insertion in the BST
+3. Write a random generator to add randomly many objects in the BST
+4. Write a benchmark where you can vary the number of thread
+5. Writer a short report in which you present your results with nice graphics (e.g. random insertion time according to number of threads)
