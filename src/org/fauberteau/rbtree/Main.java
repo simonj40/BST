@@ -42,18 +42,22 @@ public class Main {
 	private  final static ExecutorService service = Executors
 			.newFixedThreadPool(MAX_THREADS);
 
-	private static int THREADS_NUM = 100;
-	private static int ADD_PER_THREADS = 1000;
+	private static int THREADS_NUM = 2000;
+	private static int NODE_INSERTED = 1000000;
+	private static int ADD_PER_THREADS = NODE_INSERTED/THREADS_NUM;
 
 	public static BinarySearchTree<Integer> rbtree = new BinarySearchTree<>();
 
 	public static final void main(String[] args) throws IOException {
 		
+		
 		double AVG_ADDING_TIME = 0;
 		double AVG_TIME_THREAD = 0;
 		ArrayList<Future<Long>> futureList = new ArrayList<>();
 		
-	
+		long start = System.currentTimeMillis();
+
+		
 		RandomGenerator generator = new RandomGenerator(ADD_PER_THREADS);
 		
 		for (int i = 0; i < THREADS_NUM; i++) {
@@ -71,7 +75,10 @@ public class Main {
 				e.printStackTrace();
 			}
 		}
-		service.shutdown();
+		
+		service.shutdownNow();
+		
+		long time = System.currentTimeMillis() - start;
 		
 		AVG_TIME_THREAD = AVG_TIME_THREAD/THREADS_NUM;
 		
@@ -82,19 +89,20 @@ public class Main {
 		AVG_ADDING_TIME = rbtree.getTime();
 		
 		System.out.println();
+		System.out.println("EXECUTION TIME : "+time);
 		System.out.println("NUMBER OF THREADS : " + THREADS_NUM);
 		System.out.println("ADD PER THREADS : " + ADD_PER_THREADS);
 		System.out.println("AVERAGE ADDING TIME : " + AVG_ADDING_TIME);
 		System.out.println("AVERAGE TIME PER THREADS : " + AVG_TIME_THREAD);
 		
-
+		/*
 		String name = "rbtree";
 		PrintWriter writer = new PrintWriter(name + ".dot");
 		writer.println(rbtree.toDOT(name));
 		writer.close();
 		ProcessBuilder builder = new ProcessBuilder("/usr/local/bin/dot", "-Tpdf", "-o", name + ".pdf ", name + ".dot");
 		builder.start();
-		
+		*/
 		
 		
 	}
