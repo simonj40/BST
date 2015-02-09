@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	
+
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
-	
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
-	<!-- TODO Add Nodes -->
-</BorderPane>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BenchmarkController">
+   <children>
+      <BorderPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="39.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="nodesNumber" layoutX="72.0" layoutY="7.0" prefHeight="26.0" prefWidth="59.0" />
+                  <TextField fx:id="threadsNumber" layoutX="211.0" layoutY="7.0" prefHeight="26.0" prefWidth="59.0" />
+                  <Label layoutX="14.0" layoutY="12.0" text="Adding" />
+                  <Label layoutX="152.0" layoutY="12.0" text="Threads" />
+                  <ProgressBar fx:id="progressBar" layoutX="361.0" layoutY="10.0" prefHeight="20.0" prefWidth="225.0" progress="0.0" />
+                  <Button layoutX="283.0" layoutY="7.0" mnemonicParsing="false" onAction="#launchAction" text="Launch" />
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane fx:id="apane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
