@@ -27,6 +27,8 @@
 package org.fauberteau.rbtree;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -39,8 +41,12 @@ import java.util.concurrent.locks.ReentrantLock;
 public class BinarySearchTree<E extends Comparable<E>> {
 
 	private BinarySearchNode<E> root;
-
 	private Lock lock = new ReentrantLock();
+	ArrayDeque<BinarySearchNode<E>> queue = new ArrayDeque<>();
+
+	List<E> keyList = new ArrayList<E>();
+
+	// private List<Integer> nodelist = new ArrayList<Integer>();
 
 	/**
 	 * Add an element in the tree if it is not already present.
@@ -87,7 +93,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
 		return true;
 	}
 
-	private BinarySearchNode<E> getRoot() {
+	public BinarySearchNode<E> getRoot() {
 		return root;
 	}
 
@@ -142,11 +148,72 @@ public class BinarySearchTree<E extends Comparable<E>> {
 					queue.offerFirst(left);
 				}
 			}
-			
-			time = time/count;
+
+			time = time / count;
 		}
 
 		return time;
+	}
+
+	public boolean checkBST(BinarySearchNode<E> a) {
+		// Implement a method which tests if a BinarySearchTree object respects
+		// the BST properties.
+		// The aim of this method is to validate the consistency of your
+		// multi-threaded addition process.
+
+		if (a != null) {
+
+			if (a.getKey() == null) {
+				return false;
+			}
+
+			if ((a.getLeftChild() != null)
+					&& (a.getLeftChild().getKey().compareTo(a.getKey()) < 0))
+				return false;
+			if ((a.getRightChild() != null)
+					&& (a.getRightChild().getKey().compareTo(a.getKey()) > 0))
+				return false;
+
+			if (a.getLeftChild() != null)
+				checkBST(a.getLeftChild());
+			if (a.getRightChild() != null)
+				checkBST(a.getRightChild());
+		}
+
+		return true;
+	}
+
+	public boolean isBST() {
+
+		return checkBST(getRoot()) && checkUnicity();
+	}
+
+	public boolean checkUnicity() {
+
+		ArrayDeque<BinarySearchNode<E>> queue = new ArrayDeque<>();
+
+		List<E> keyList = new ArrayList<E>();
+
+		if (getRoot() != null) {
+			queue.offerFirst(getRoot());
+
+			while (!queue.isEmpty()) {
+				BinarySearchNode<E> node = queue.pollLast();
+
+				if (keyList.contains(node.key)) {
+					return false;
+				} else {
+					keyList.add(node.key);
+					if (node.hasLeftChild())
+						queue.offerFirst(node.getLeftChild());
+					if (node.hasRightChild())
+						queue.offerFirst(node.getRightChild());
+				}
+			}
+		}
+
+		return true;
+
 	}
 
 	private static class BinarySearchNode<E extends Comparable<E>> {
@@ -194,8 +261,8 @@ public class BinarySearchTree<E extends Comparable<E>> {
 		private void setTime(long time) {
 			this.time = time;
 		}
-		
-		private long getTime(){
+
+		private long getTime() {
 			return time;
 		}
 
