@@ -36,7 +36,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class Main {
+public class Main2 {
 
 	private final static int MAX_THREADS = 10000;
 	private  final static ExecutorService service = Executors
