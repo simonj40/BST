@@ -12,8 +12,8 @@
          <top>
             <AnchorPane prefHeight="39.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="nodesNumber" layoutX="72.0" layoutY="7.0" prefHeight="26.0" prefWidth="59.0" />
-                  <TextField fx:id="threadsNumber" layoutX="211.0" layoutY="7.0" prefHeight="26.0" prefWidth="59.0" />
+                  <TextField fx:id="nodesNumber" layoutX="69.0" layoutY="7.0" onAction="#launchAction" prefHeight="26.0" prefWidth="59.0" />
+                  <TextField fx:id="threadsNumber" layoutX="211.0" layoutY="7.0" onAction="#launchAction" prefHeight="26.0" prefWidth="59.0" />
                   <Label layoutX="14.0" layoutY="12.0" text="Adding" />
                   <Label layoutX="152.0" layoutY="12.0" text="Threads" />
                   <ProgressBar fx:id="progressBar" layoutX="361.0" layoutY="10.0" prefHeight="20.0" prefWidth="225.0" progress="0.0" />

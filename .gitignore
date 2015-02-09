@@ -2,5 +2,5 @@
 .classpath
 .project
 bin
-
+build.fxbuild
 src/org/fauberteau/rbtree/BinarySearchTree.java
