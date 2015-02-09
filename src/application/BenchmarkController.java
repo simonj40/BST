@@ -70,8 +70,12 @@ public class BenchmarkController {
 		
 		x.autoRangingProperty().set(true);
 		y.autoRangingProperty().set(true);
+		x.setLabel("Threads");
+		y.setLabel("Nanoseconds");
+		
 		lineChart = new LineChart<>(x, y, series);
-
+		lineChart.setTitle("Average addition time according to the number of threads");
+		lineChart.setLegendVisible(false);
 		pane.setCenter(lineChart);
 
 	}
@@ -118,7 +122,6 @@ public class BenchmarkController {
 		data.clear();		
 		for(Data d : benchmarkData){
 			data.add(d);
-			System.out.println(d.getXValue()+" , "+d.getYValue());
 		}
 		
 	}
@@ -191,7 +194,7 @@ public class BenchmarkController {
 				benchmarkData.add(new Data<Number, Number>( i , avg.getAsDouble()));
 
 				//Clear the tree !
-
+				tree = new BinarySearchTree<>();
 			}
 
 			return null;
